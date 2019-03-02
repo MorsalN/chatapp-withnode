@@ -55,6 +55,7 @@ var user = require('./routes/user'); //requires user module from user.js
 var app = express();
 
 // view engine setup
+app.set('views', path.join(__dirname, 'views')); // apparently you don't need this but the logic is that it will go into the view folder and get the .ejs folder 
 app.set('public', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 
@@ -65,6 +66,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', routes);
 app.use('/user',user);
+
 
 
 app.listen(port, function() {
