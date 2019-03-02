@@ -26,10 +26,14 @@ router.post('/login', function (req, res, next) {
   .then((user) => {
     if (user) {
       if (req.body.psw === user.password) {
-        res.send(200, user);
+        // res.send(200, user);
+        res.redirect("/user/chats")
       } else {
         res.send(400, {err: 'Incorrect password'});
       }
+    } else {
+      console.log(user);
+      res.send(400, {err: 'No User'});
     }
   })
   .catch((err) => {
@@ -50,7 +54,9 @@ router.post('/register', function (req, res, next) {
     }
   })
   .then((user) => {
-    res.send(201, {success: 'Created new user'});
+    console.log('created a user');
+    // res.send(201, {success: 'Created new user'});
+    res.redirect("/user/chats");
   })
   .catch((err) => {
     res.send(500, err);
